@@ -20,7 +20,7 @@ export async function GET(req: NextRequest) {
 
     // Return raw ciphertext — decryption happens client-side only
     return NextResponse.json(
-      vaults.map((v) => ({
+      vaults.map((v: Awaited<ReturnType<typeof prisma.vault.findMany>>[0]) => ({
         id: v.id,
         title: v.title,
         username: v.username,

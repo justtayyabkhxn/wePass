@@ -10,12 +10,14 @@ function bytesToB64(bytes: Uint8Array): string {
   return btoa(String.fromCharCode(...bytes));
 }
 
-function b64ToBytes(b64: string): Uint8Array {
-  return new Uint8Array(
-    atob(b64)
-      .split("")
-      .map((c) => c.charCodeAt(0))
-  );
+function b64ToBytes(b64: string): Uint8Array<ArrayBuffer> {
+  const str = atob(b64);
+  const buffer = new ArrayBuffer(str.length);
+  const view = new Uint8Array(buffer);
+  for (let i = 0; i < str.length; i++) {
+    view[i] = str.charCodeAt(i);
+  }
+  return view;
 }
 
 // ── Key derivation ────────────────────────────────────────────────────────────
