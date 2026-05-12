@@ -1,8 +1,4 @@
 
-# Project Title
-
-A brief description of what this project does and who it's for
-
 # wePass | Secure Password Manager
 
 > A zero-knowledge, client-side encrypted password manager. Your passwords are encrypted in your browser before they ever leave your device — the server stores only ciphertext and physically cannot read your data.
