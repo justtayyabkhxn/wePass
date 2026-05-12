@@ -1,0 +1,3 @@
+-- AlterTable
+ALTER TABLE "User" ADD COLUMN     "kdfSalt" TEXT NOT NULL DEFAULT '',
+ADD COLUMN     "vaultPin" TEXT NOT NULL DEFAULT '';

@@ -1,0 +1,35 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id            String   @id @default(cuid())
+  email         String   @unique
+  name          String
+  passwordHash  String
+  kdfSalt       String   @default("")  // base64 salt for PBKDF2 key derivation
+  vaultPin      String   @default("")  // bcrypt hash of the 5-char vault reveal PIN
+
+  vaults Vault[]
+
+  createdAt DateTime @default(now())
+}
+
+model Vault {
+  id                 String   @id @default(cuid())
+  title              String
+  username           String
+  encryptedPassword  String
+  iv                 String
+  category           String   @default("Other")
+
+  userId String
+  user   User @relation(fields: [userId], references: [id])
+
+  createdAt DateTime @default(now())
+}
